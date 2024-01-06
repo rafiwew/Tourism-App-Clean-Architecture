@@ -3,6 +3,7 @@ package com.piwew.tourismapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
@@ -48,6 +49,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_home -> {
                 fragment = HomeFragment()
                 title = getString(R.string.app_name)
+            }
+            R.id.nav_favorite -> {
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
+            }
+            R.id.nav_map -> {
+                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
             }
         }
         if (fragment != null) {
