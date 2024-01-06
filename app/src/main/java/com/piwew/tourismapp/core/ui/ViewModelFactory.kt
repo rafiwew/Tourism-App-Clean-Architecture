@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.piwew.tourismapp.core.data.source.TourismRepository
 import com.piwew.tourismapp.core.di.Injection
+import com.piwew.tourismapp.detail.DetailTourismViewModel
+import com.piwew.tourismapp.favorite.FavoriteViewModel
 import com.piwew.tourismapp.home.HomeViewModel
 
 class ViewModelFactory private constructor(private val tourismRepository: TourismRepository) :
@@ -15,6 +17,12 @@ class ViewModelFactory private constructor(private val tourismRepository: Touris
         return when {
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(tourismRepository) as T
+            }
+            modelClass.isAssignableFrom(DetailTourismViewModel::class.java) -> {
+                DetailTourismViewModel(tourismRepository) as T
+            }
+            modelClass.isAssignableFrom(FavoriteViewModel::class.java) -> {
+                FavoriteViewModel(tourismRepository) as T
             }
 
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)

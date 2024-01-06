@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import com.piwew.tourismapp.databinding.ActivityMainBinding
+import com.piwew.tourismapp.favorite.FavoriteFragment
 import com.piwew.tourismapp.home.HomeFragment
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -51,7 +52,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 title = getString(R.string.app_name)
             }
             R.id.nav_favorite -> {
-                Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
+                fragment = FavoriteFragment()
+                title = getString(R.string.menu_favorite)
             }
             R.id.nav_map -> {
                 Toast.makeText(this, "Coming soon", Toast.LENGTH_SHORT).show()
