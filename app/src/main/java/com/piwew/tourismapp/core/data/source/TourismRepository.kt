@@ -1,11 +1,13 @@
 package com.piwew.tourismapp.core.data.source
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.switchMap
 import com.piwew.tourismapp.core.data.source.local.LocalDataSource
-import com.piwew.tourismapp.core.data.source.local.entity.TourismEntity
 import com.piwew.tourismapp.core.data.source.remote.RemoteDataSource
 import com.piwew.tourismapp.core.data.source.remote.network.ApiResponse
 import com.piwew.tourismapp.core.data.source.remote.response.TourismResponse
+import com.piwew.tourismapp.core.domain.model.Tourism
 import com.piwew.tourismapp.core.utils.AppExecutors
 import com.piwew.tourismapp.core.utils.DataMapper
 
@@ -15,19 +17,26 @@ class TourismRepository private constructor(
     private val appExecutors: AppExecutors,
 ) {
 
-    fun getAllTourism(): LiveData<Resource<List<TourismEntity>>> =
-        object : NetworkBoundResource<List<TourismEntity>, List<TourismResponse>>(appExecutors) {
-            override fun loadFromDB(): LiveData<List<TourismEntity>> = localDataSource.getAllTourism()
+    fun getAllTourism(): LiveData<Resource<List<Tourism>>> =
+        object : NetworkBoundResource<List<Tourism>, List<TourismResponse>>(appExecutors) {
+            override fun loadFromDB(): LiveData<List<Tourism>> {
+                return localDataSource.getAllTourism().switchMap { data ->
+                    MutableLiveData(DataMapper.mapEntitiesToDomain(data))
+                }
+            }
             override fun createCall(): LiveData<ApiResponse<List<TourismResponse>>> = remoteDataSource.getAllTourism()
-            override fun shouldFetch(data: List<TourismEntity>?): Boolean = data.isNullOrEmpty()
+            override fun shouldFetch(data: List<Tourism>?): Boolean = data.isNullOrEmpty()
             override fun saveCallResult(data: List<TourismResponse>) = localDataSource.insertTourism(DataMapper.mapResponsesToEntities(data))
         }.asLiveData()
 
-    fun getFavoriteTourism(): LiveData<List<TourismEntity>> {
-        return localDataSource.getFavoriteTourism()
+    fun getFavoriteTourism(): LiveData<List<Tourism>> {
+        return localDataSource.getFavoriteTourism().switchMap { data ->
+            MutableLiveData(DataMapper.mapEntitiesToDomain(data))
+        }
     }
 
-    fun setFavoriteTourism(tourismEntity: TourismEntity, state: Boolean) {
+    fun setFavoriteTourism(tourism: Tourism, state: Boolean) {
+        val tourismEntity = DataMapper.mapDomainToEntity(tourism)
         appExecutors.diskIO().execute { localDataSource.setFavoriteTourism(tourismEntity, state) }
     }
 
