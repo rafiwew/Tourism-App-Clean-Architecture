@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
     private fun setupRecyclerView() {
         tourismAdapter.onItemClick = { selectedData ->
             startActivity(Intent(activity, DetailTourismActivity::class.java)
-                .apply { putExtra(EXTRA_DATA, selectedData.tourismId) }
+                .apply { putExtra(EXTRA_DATA, selectedData) }
             )
         }
 
