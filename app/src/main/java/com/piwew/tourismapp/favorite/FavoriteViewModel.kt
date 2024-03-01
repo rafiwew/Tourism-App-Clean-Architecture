@@ -1,8 +1,8 @@
 package com.piwew.tourismapp.favorite
 
 import androidx.lifecycle.ViewModel
-import com.piwew.tourismapp.core.data.source.TourismRepository
+import com.piwew.tourismapp.core.domain.usecase.TourismUseCase
 
-class FavoriteViewModel(tourismRepository: TourismRepository) : ViewModel() {
-    val favoriteTourism = tourismRepository.getFavoriteTourism()
+class FavoriteViewModel(tourismUseCase: TourismUseCase) : ViewModel() {
+    val favoriteTourism = tourismUseCase.getFavoriteTourism()
 }

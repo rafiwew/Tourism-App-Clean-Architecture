@@ -1,8 +1,8 @@
 package com.piwew.tourismapp.home
 
 import androidx.lifecycle.ViewModel
-import com.piwew.tourismapp.core.data.source.TourismRepository
+import com.piwew.tourismapp.core.domain.usecase.TourismUseCase
 
-class HomeViewModel(tourismRepository: TourismRepository) : ViewModel() {
-    val tourism = tourismRepository.getAllTourism()
+class HomeViewModel(tourismUseCase: TourismUseCase) : ViewModel() {
+    val tourism = tourismUseCase.getAllTourism()
 }
