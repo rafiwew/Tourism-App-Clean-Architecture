@@ -8,9 +8,8 @@ import com.piwew.tourismapp.core.domain.model.Tourism
 import com.piwew.tourismapp.core.domain.repository.ITourismRepository
 import com.piwew.tourismapp.core.utils.AppExecutors
 import com.piwew.tourismapp.core.utils.DataMapper
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class TourismRepository private constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -18,27 +17,24 @@ class TourismRepository private constructor(
     private val appExecutors: AppExecutors,
 ) : ITourismRepository {
 
-    override fun getAllTourism(): Flowable<Resource<List<Tourism>>> =
+    override fun getAllTourism(): Flow<Resource<List<Tourism>>> =
         object : NetworkBoundResource<List<Tourism>, List<TourismResponse>>() {
-            override fun loadFromDB(): Flowable<List<Tourism>> {
+            override fun loadFromDB(): Flow<List<Tourism>> {
                 return localDataSource.getAllTourism().map { DataMapper.mapEntitiesToDomain(it) }
             }
 
-            override fun createCall(): Flowable<ApiResponse<List<TourismResponse>>> =
+            override suspend fun createCall(): Flow<ApiResponse<List<TourismResponse>>> =
                 remoteDataSource.getAllTourism()
 
             override fun shouldFetch(data: List<Tourism>?): Boolean = data.isNullOrEmpty()
 
-            override fun saveCallResult(data: List<TourismResponse>) {
+            override suspend fun saveCallResult(data: List<TourismResponse>) {
                 val tourismList = DataMapper.mapResponsesToEntities(data)
                 localDataSource.insertTourism(tourismList)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe()
             }
-        }.asFlowable()
+        }.asFlow()
 
-    override fun getFavoriteTourism(): Flowable<List<Tourism>> {
+    override fun getFavoriteTourism(): Flow<List<Tourism>> {
         return localDataSource.getFavoriteTourism().map { DataMapper.mapEntitiesToDomain(it) }
     }
 
