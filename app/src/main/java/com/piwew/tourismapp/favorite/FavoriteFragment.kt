@@ -6,19 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.piwew.tourismapp.core.ui.TourismAdapter
-import com.piwew.tourismapp.core.ui.ViewModelFactory
 import com.piwew.tourismapp.databinding.FragmentFavoriteBinding
 import com.piwew.tourismapp.detail.DetailTourismActivity
 import com.piwew.tourismapp.detail.DetailTourismActivity.Companion.EXTRA_DATA
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteBinding
     private val tourismAdapter = TourismAdapter()
-    private val viewModel by viewModels<FavoriteViewModel> { ViewModelFactory.getInstance(requireContext()) }
+    private val favoriteViewModel: FavoriteViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +49,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun observeFavoriteTourismData() {
-        viewModel.favoriteTourism.observe(requireActivity()) { dataTourism ->
+        favoriteViewModel.favoriteTourism.observe(requireActivity()) { dataTourism ->
             tourismAdapter.submitList(dataTourism)
             binding.viewEmpty.root.visibility = if (dataTourism.isNotEmpty()) View.GONE else View.VISIBLE
         }
