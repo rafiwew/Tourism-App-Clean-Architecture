@@ -3,8 +3,11 @@ package com.piwew.tourismapp.core.data.source.local
 import com.piwew.tourismapp.core.data.source.local.entity.TourismEntity
 import com.piwew.tourismapp.core.data.source.local.room.TourismDao
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class LocalDataSource private constructor(private val tourismDao: TourismDao) {
+@Singleton
+class LocalDataSource @Inject constructor(private val tourismDao: TourismDao) {
 
     fun getAllTourism(): Flow<List<TourismEntity>> = tourismDao.getAllTourism()
 
@@ -15,14 +18,5 @@ class LocalDataSource private constructor(private val tourismDao: TourismDao) {
     fun setFavoriteTourism(tourism: TourismEntity, newState: Boolean) {
         tourism.isFavorite = newState
         tourismDao.updateFavoriteTourism(tourism)
-    }
-
-    companion object {
-        private var instance: LocalDataSource? = null
-
-        fun getInstance(tourismDao: TourismDao): LocalDataSource =
-            instance ?: synchronized(this) {
-                instance ?: LocalDataSource(tourismDao)
-            }
     }
 }

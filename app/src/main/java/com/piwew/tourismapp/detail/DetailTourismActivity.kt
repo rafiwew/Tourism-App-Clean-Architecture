@@ -4,18 +4,23 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
+import com.piwew.tourismapp.MyApplication
 import com.piwew.tourismapp.R
 import com.piwew.tourismapp.core.domain.model.Tourism
 import com.piwew.tourismapp.core.ui.ViewModelFactory
 import com.piwew.tourismapp.core.utils.loadImage
 import com.piwew.tourismapp.databinding.ActivityDetailTourismBinding
+import javax.inject.Inject
 
 class DetailTourismActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailTourismBinding
-    private val viewModel by viewModels<DetailTourismViewModel> { ViewModelFactory.getInstance(this) }
+
+    @Inject lateinit var factory: ViewModelFactory
+    private val detailTourismViewModel: DetailTourismViewModel by viewModels { factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailTourismBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -33,7 +38,7 @@ class DetailTourismActivity : AppCompatActivity() {
             setStatusFavorite(statusFavorite)
             binding.fab.setOnClickListener {
                 statusFavorite = !statusFavorite
-                viewModel.setFavoriteTourism(detailTourism, statusFavorite)
+                detailTourismViewModel.setFavoriteTourism(detailTourism, statusFavorite)
                 setStatusFavorite(statusFavorite)
             }
         }
