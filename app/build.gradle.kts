@@ -70,6 +70,16 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.1")
     ksp("androidx.room:room-compiler:2.6.1")
 
+    // ReactiveX
+    val rxjavaVersion = rootProject.extra.get("rxjavaVersion")
+    implementation("io.reactivex.rxjava2:rxjava:$rxjavaVersion")
+    val rxandroidVersion = rootProject.extra.get("rxandroidVersion")
+    implementation("io.reactivex.rxjava2:rxandroid:$rxandroidVersion")
+    implementation("com.squareup.retrofit2:adapter-rxjava2:2.9.0")
+    implementation("androidx.room:room-rxjava2:2.6.1")
+    val lifecycleVersion = rootProject.extra.get("lifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-reactivestreams-ktx:$lifecycleVersion")
+
     // Testing
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
