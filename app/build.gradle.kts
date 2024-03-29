@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
     id("kotlin-parcelize")
     id("kotlin-kapt")
 }
@@ -76,8 +77,12 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
 
     // Dagger DI
-    implementation("com.google.dagger:dagger:2.46.1")
-    kapt("com.google.dagger:dagger-compiler:2.46.1")
+    // implementation("com.google.dagger:dagger:2.46.1")
+    // kapt("com.google.dagger:dagger-compiler:2.46.1")
+
+    // Dagger Hilt
+    implementation("com.google.dagger:hilt-android:2.48")
+    kapt("com.google.dagger:hilt-android-compiler:2.48")
 
     // Testing
     testImplementation("junit:junit:4.13.2")

@@ -11,7 +11,9 @@ import com.google.android.material.navigation.NavigationView
 import com.piwew.tourismapp.databinding.ActivityMainBinding
 import com.piwew.tourismapp.favorite.FavoriteFragment
 import com.piwew.tourismapp.home.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding

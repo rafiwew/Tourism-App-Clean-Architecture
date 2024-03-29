@@ -4,23 +4,20 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import com.piwew.tourismapp.MyApplication
 import com.piwew.tourismapp.R
 import com.piwew.tourismapp.core.domain.model.Tourism
-import com.piwew.tourismapp.core.ui.ViewModelFactory
 import com.piwew.tourismapp.core.utils.loadImage
 import com.piwew.tourismapp.databinding.ActivityDetailTourismBinding
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailTourismActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailTourismBinding
 
-    @Inject lateinit var factory: ViewModelFactory
-    private val detailTourismViewModel: DetailTourismViewModel by viewModels { factory }
+    private val detailTourismViewModel: DetailTourismViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as MyApplication).appComponent.inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityDetailTourismBinding.inflate(layoutInflater)
         setContentView(binding.root)

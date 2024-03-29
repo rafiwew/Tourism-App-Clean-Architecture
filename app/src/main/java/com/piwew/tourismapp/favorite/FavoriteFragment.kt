@@ -1,6 +1,5 @@
 package com.piwew.tourismapp.favorite
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,21 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.piwew.tourismapp.MyApplication
 import com.piwew.tourismapp.core.ui.TourismAdapter
-import com.piwew.tourismapp.core.ui.ViewModelFactory
 import com.piwew.tourismapp.databinding.FragmentFavoriteBinding
 import com.piwew.tourismapp.detail.DetailTourismActivity
 import com.piwew.tourismapp.detail.DetailTourismActivity.Companion.EXTRA_DATA
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FavoriteFragment : Fragment() {
 
     private lateinit var binding: FragmentFavoriteBinding
     private val tourismAdapter = TourismAdapter()
-
-    @Inject lateinit var factory: ViewModelFactory
-    private val favoriteViewModel: FavoriteViewModel by viewModels { factory }
+    private val favoriteViewModel: FavoriteViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,11 +27,6 @@ class FavoriteFragment : Fragment() {
     ): View {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity().application as MyApplication).appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
