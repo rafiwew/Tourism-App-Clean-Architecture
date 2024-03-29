@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.piwew.tourismapp.R
-import com.piwew.tourismapp.core.data.source.Resource
-import com.piwew.tourismapp.core.ui.TourismAdapter
+import com.piwew.core.data.source.Resource
+import com.piwew.core.ui.TourismAdapter
 import com.piwew.tourismapp.databinding.FragmentHomeBinding
 import com.piwew.tourismapp.detail.DetailTourismActivity
 import com.piwew.tourismapp.detail.DetailTourismActivity.Companion.EXTRA_DATA

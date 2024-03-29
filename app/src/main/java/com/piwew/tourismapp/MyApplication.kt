@@ -1,9 +1,9 @@
 package com.piwew.tourismapp
 
 import android.app.Application
-import com.piwew.tourismapp.core.di.databaseModule
-import com.piwew.tourismapp.core.di.networkModule
-import com.piwew.tourismapp.core.di.repositoryModule
+import com.piwew.core.di.databaseModule
+import com.piwew.core.di.networkModule
+import com.piwew.core.di.repositoryModule
 import com.piwew.tourismapp.di.useCaseModule
 import com.piwew.tourismapp.di.viewModelModule
 import org.koin.android.ext.koin.androidContext

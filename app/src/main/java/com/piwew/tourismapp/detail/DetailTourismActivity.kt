@@ -4,15 +4,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import com.piwew.tourismapp.R
-import com.piwew.tourismapp.core.domain.model.Tourism
-import com.piwew.tourismapp.core.utils.loadImage
+import com.piwew.core.domain.model.Tourism
+import com.piwew.core.utils.loadImage
 import com.piwew.tourismapp.databinding.ActivityDetailTourismBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DetailTourismActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailTourismBinding
-    private val detailTourismlViewModel: DetailTourismViewModel by viewModel()
+    private val detailTourismViewModel: DetailTourismViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class DetailTourismActivity : AppCompatActivity() {
             setStatusFavorite(statusFavorite)
             binding.fab.setOnClickListener {
                 statusFavorite = !statusFavorite
-                detailTourismlViewModel.setFavoriteTourism(detailTourism, statusFavorite)
+                detailTourismViewModel.setFavoriteTourism(detailTourism, statusFavorite)
                 setStatusFavorite(statusFavorite)
             }
         }

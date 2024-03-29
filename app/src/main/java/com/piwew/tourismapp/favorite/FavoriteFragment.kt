@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.piwew.tourismapp.core.ui.TourismAdapter
+import com.piwew.core.ui.TourismAdapter
 import com.piwew.tourismapp.databinding.FragmentFavoriteBinding
 import com.piwew.tourismapp.detail.DetailTourismActivity
 import com.piwew.tourismapp.detail.DetailTourismActivity.Companion.EXTRA_DATA

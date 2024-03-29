@@ -1,8 +1,8 @@
 package com.piwew.tourismapp.detail
 
 import androidx.lifecycle.ViewModel
-import com.piwew.tourismapp.core.domain.model.Tourism
-import com.piwew.tourismapp.core.domain.usecase.TourismUseCase
+import com.piwew.core.domain.model.Tourism
+import com.piwew.core.domain.usecase.TourismUseCase
 
 class DetailTourismViewModel(private val tourismUseCase: TourismUseCase) : ViewModel() {
     fun setFavoriteTourism(tourism: Tourism, newStatus: Boolean) =
