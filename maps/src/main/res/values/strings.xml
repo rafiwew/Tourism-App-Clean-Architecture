@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tourism_map">Tourism Map</string>
+    <string name="map_of">This is map of %1$s</string>
+</resources>

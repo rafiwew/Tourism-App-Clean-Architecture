@@ -1,23 +1,17 @@
 plugins {
-    id("com.android.application")
+    id("com.android.dynamic-feature")
     id("org.jetbrains.kotlin.android")
     id("com.google.devtools.ksp")
-    id("kotlin-parcelize")
 }
 
 apply(from = "../shared_dependencies.gradle")
 
 android {
-    namespace = "com.piwew.tourismapp"
-    compileSdk = 34
+    namespace = "com.piwew.tourismapp.maps"
+    compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.piwew.tourismapp"
         minSdk = 24
-        targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -30,22 +24,24 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "1.8"
     }
+
     buildFeatures {
         viewBinding = true
-        buildConfig = true
     }
-    dynamicFeatures += setOf(":maps")
 }
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":app"))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
     implementation("androidx.core:core-ktx:1.12.0") // kotlin lang
 }
