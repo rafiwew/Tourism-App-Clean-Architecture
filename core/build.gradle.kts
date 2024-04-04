@@ -61,4 +61,8 @@ dependencies {
 
     // Android architecture component
     api("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
+
+    // SQLCipher lib
+    implementation("net.zetetic:android-database-sqlcipher:4.4.0")
+    implementation("androidx.sqlite:sqlite-ktx:2.4.0")
 }
